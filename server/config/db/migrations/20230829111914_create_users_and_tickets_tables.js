@@ -13,7 +13,7 @@ exports.up = function(knex) {
   })
   .createTable('tickets', function(table) {
     table.increments();
-    table.string('ticket_number').unique()
+    table.string('ticket_number')
     table.string('description')
     table.timestamp('created_date').defaultTo(knex.fn.now());
     table.timestamp('updated_date').defaultTo(knex.fn.now());
