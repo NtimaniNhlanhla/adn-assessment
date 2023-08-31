@@ -23,9 +23,10 @@ exports.createTicket = async (req, res) => {
 
     const { description } = req.body;
     const user_id = req.user[0].id;
+    const ticket_number = `T${Math.random().toString().substr(2, 4)}`
 
     try {
-        const ticket = await knex('tickets').insert({description, user_id});
+        const ticket = await knex('tickets').insert({description, user_id, ticket_number});
         return res.status(201).json({
             success: true,
             ticket
