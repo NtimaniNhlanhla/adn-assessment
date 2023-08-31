@@ -82,7 +82,7 @@ export const ticketSlice = createSlice({
         state.isError = true
         state.message = action.payload
       })
-     
+
   },
 })
 

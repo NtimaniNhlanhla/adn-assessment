@@ -8,10 +8,10 @@ module.exports = {
   development: {
     client: 'pg',
     connection: {
-      host: 'localhost',
-      user: 'postgres',
-      password: '576108',
-      database: 'tickets_DB',
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
       charset: 'utf8'
     },
     migrations: {

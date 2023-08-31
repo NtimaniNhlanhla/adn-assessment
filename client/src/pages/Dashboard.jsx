@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import TicketForm from '../components/TicketForm';
 import Spinner from '../components/Spinner'
-import {toast } from 'react-toastify'
-import { getTickets, reset} from '../features/ticket/ticketSlice'
+import { toast } from 'react-toastify'
+import { getTickets, reset } from '../features/ticket/ticketSlice'
 import TicketItem from '../components/TicketsTable';
 
 function Dashboard() {
@@ -12,49 +12,48 @@ function Dashboard() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const {user} = useSelector((state) => state.auth);
-  const { tickets, isLoading, isError, message} = useSelector((state) =>
-    state.tickets) 
+  const { user } = useSelector((state) => state.auth);
+  const { tickets, isLoading, isError, message } = useSelector((state) =>
+    state.tickets)
 
   useEffect(() => {
-    if(isError) {
-      
+    if (isError) {
+
       toast.error(message)
     }
-    if(!user) {
+    if (!user) {
       navigate('/login')
     }
-    
+
     dispatch(getTickets())
 
     return () => {
       dispatch(reset())
     }
 
-  },[user, navigate, isError, message, dispatch])
+  }, [user, navigate, isError, message, dispatch])
 
 
-  if(isLoading) {
+  if (isLoading) {
     return <Spinner />
   }
-  
   return <>
-      <section className="heading">
-        <h1>Welcome {user && user.name}</h1>
-        <p>Tickets Dashboard</p>
-      </section>
-      <TicketForm />
+    <section className="heading">
+      <h1>Welcome {user && user.name}</h1>
+      <p>Tickets Dashboard</p>
+    </section>
+    <TicketForm />
 
-      <section className="content">
-        {tickets ? (
+    <section className="content">
+      {tickets.length > 0 ? (
 
-          <div className="">
-            
-              <TicketItem tickets={tickets.tickets} />
-          
-          </div>
-        ) : (<h3>You have not set any tickets.</h3>) }
-      </section>
+        <div className="">
+
+          <TicketItem tickets={tickets} />
+
+        </div>
+      ) : (<h3>You have not set any tickets.</h3>)}
+    </section>
   </>
 }
 
