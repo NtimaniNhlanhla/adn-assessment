@@ -20,10 +20,10 @@ Before you begin, ensure you have the following installed:
 
 ## Frontend Setup
 
-1. Navigate to the `frontend` directory.
+1. Navigate to the `client` directory.
 
 ```bash
-cd frontend
+cd client
 ```
 
 2. Install the required dependencies.
@@ -34,10 +34,10 @@ npm install
 
 ## Backend Setup
 
-1. Navigate to the `backend` directory.
+1. Navigate to the `server` directory.
 
 ```bash
-cd backend
+cd server
 ```
 
 2. Install the required dependencies.
@@ -60,14 +60,14 @@ POSTGRES_DATABASE="verceldb"
 
 ## Running the Application
 
-1. Start the backend server. From the `backend` directory:
+1. Start the backend server. From the `server` directory:
 
 ```bash
 npm start
 ```
 The backend server will start port 5000.  `http://localhost:5000`
 
-2. Start the frontend development server. From the `frontend` directory:
+2. Start the frontend development server. From the `client` directory:
 
 ```bash
 npm start
