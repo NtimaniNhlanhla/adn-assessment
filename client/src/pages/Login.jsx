@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { login, reset } from '../features/auth/authSlice'
 import Spinner from '../components/Spinner'
+import validateEmail from '../utils/validateEmail'
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -46,6 +47,12 @@ function Login() {
       toast.error('Enter email and password');
       return;
     }
+
+    if(!validateEmail(email)){
+      toast.error('Enter valid Email')
+      return;
+  }
+
     const userData = {
       email,
       password
@@ -70,12 +77,15 @@ function Login() {
         <div className="form-group">
           <input type="email" className="form-control" id='email'
             value={email} name='email' placeholder='Enter your email'
+            maxLength={50}
             onChange={onChange}
+
           />
         </div>
         <div className="form-group">
           <input type="password" className="form-control" id='password'
             value={password} name='password' placeholder='Enter password'
+            maxLength={50}
             onChange={onChange}
           />
         </div>

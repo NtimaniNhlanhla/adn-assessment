@@ -2,7 +2,7 @@ import { Paper, TableBody, TableCell, TableContainer, TableHead, TableRow, Table
 import React, { useState } from 'react'
 import * as  moment from 'moment/moment'
 
-function TicketItem({ tickets }) {
+function TicketsTable({ tickets }) {
 
   const columns = [
     { id: 'ticket_number', name: 'Ticket Number' },
@@ -67,4 +67,4 @@ function TicketItem({ tickets }) {
   )
 }
 
-export default TicketItem
+export default TicketsTable

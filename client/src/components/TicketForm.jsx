@@ -12,6 +12,7 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
+import TicketsFilter from './TicketsFilter';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -22,7 +23,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-function TicketForm() {
+function TicketForm({onFilterChange}) {
 
   const [description, setDescription] = useState('')
   const [open, setOpen] = React.useState(false);
@@ -48,12 +49,20 @@ function TicketForm() {
 
   const dispatch = useDispatch();
 
-  return <section className='form model'>
+  return <section className='form'>
     <div >
-
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Create New Ticket
-      </Button>
+      <div className='model'>
+        <div>
+        <Button variant="outlined" onClick={handleClickOpen}>
+          Create New Ticket
+        </Button>
+        </div>
+        <div className='filter'>
+           <TicketsFilter onFilterChange={onFilterChange} />
+        </div>
+       
+      </div>
+      
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -81,6 +90,7 @@ function TicketForm() {
                 <label htmlFor='description'>Ticket Description</label>
                 <input type="text" name='description' id='description'
                   placeholder='Enter Ticket Description'
+                  maxLength={100}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />

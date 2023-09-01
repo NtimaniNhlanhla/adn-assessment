@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import TicketForm from '../components/TicketForm';
 import Spinner from '../components/Spinner'
 import { toast } from 'react-toastify'
 import { getTickets, reset } from '../features/ticket/ticketSlice'
-import TicketItem from '../components/TicketsTable';
+import TicketsTable from '../components/TicketsTable';
 
 function Dashboard() {
+
+  const [filterField, setFilterData] = useState('');
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -34,6 +36,19 @@ function Dashboard() {
   }, [user, navigate, isError, message, dispatch])
 
 
+  const onFilterChange = (e) => {
+    e.preventDefault();
+    setFilterData(e.target.value)
+
+  }
+
+  const filteredTickets = tickets.filter((ticket) => {
+    return ticket?.description?.toLowerCase().includes(filterField?.toLowerCase()) ||
+    ticket?.ticket_number?.toLowerCase().includes(filterField?.toLowerCase())
+  })
+
+
+
   if (isLoading) {
     return <Spinner />
   }
@@ -42,14 +57,14 @@ function Dashboard() {
       <h1>Welcome {user && user.name}</h1>
       <p>Tickets Dashboard</p>
     </section>
-    <TicketForm />
+    <TicketForm  onFilterChange={onFilterChange}/>
 
     <section className="content">
       {tickets.length > 0 ? (
 
         <div className="">
 
-          <TicketItem tickets={tickets} />
+          <TicketsTable tickets={filteredTickets} />
 
         </div>
       ) : (<h3>You have not set any tickets.</h3>)}
