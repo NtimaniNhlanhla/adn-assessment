@@ -32,6 +32,12 @@ cd client
 npm install
 ```
 
+3. Create an environment variable file (`.env.local`) in the `client` directory and define the following variables:
+
+```bash
+REACT_APP_API_KEY ='http://localhost:5000/api/v1'
+```
+
 ## Backend Setup
 
 1. Navigate to the `server` directory.
